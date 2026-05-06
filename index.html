@@ -9,414 +9,447 @@
   <style>
     * { font-family: 'Assistant', sans-serif; }
     html { scroll-behavior: smooth; }
-    body { background: #FDFBF8; color: #2D2D2D; }
-    .fade-in { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s ease; }
-    .fade-in.visible { opacity:1; transform:translateY(0); }
-    .faq-answer { max-height:0; overflow:hidden; transition:max-height .35s ease; }
-    .faq-answer.open { max-height:400px; }
-    .nav-link { position:relative; }
-    .nav-link::after { content:''; position:absolute; bottom:-3px; right:0; width:0; height:1.5px; background:#5C6B3A; transition:width .25s; }
-    .nav-link:hover::after { width:100%; }
-    @keyframes wa-pulse { 0%,100%{box-shadow:0 4px 16px rgba(37,211,102,.35)} 50%{box-shadow:0 4px 24px rgba(37,211,102,.65)} }
-    .wa-btn { animation:wa-pulse 2.5s infinite; }
-    .logo-nav { mix-blend-mode:multiply; }
-    .service-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,.1); }
-    .service-card { transition:transform .25s,box-shadow .25s; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-answer.open { max-height: 400px; }
+    .nav-line::after { content:''; display:block; height:2px; width:0; background:#8A6F4D; transition:width .3s; }
+    .nav-line:hover::after { width:100%; }
+    @keyframes wa-pulse { 0%,100%{box-shadow:0 4px 16px rgba(37,211,102,.4)} 50%{box-shadow:0 4px 26px rgba(37,211,102,.7)} }
+    .wa-btn { animation: wa-pulse 2.5s infinite; }
+    .logo-blend { mix-blend-mode: multiply; }
   </style>
 </head>
-<body dir="rtl">
+<body class="bg-gray-50 text-right" dir="rtl">
 
 <!-- NAVBAR -->
-<header id="navbar" class="fixed top-0 right-0 left-0 z-50 bg-white/96 backdrop-blur border-b border-gray-100 transition-shadow duration-300">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
+<header id="navbar" class="fixed top-0 right-0 left-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm transition-shadow duration-300">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
     <div class="flex items-center justify-between h-16">
-      <!-- Logo -->
-      <a href="#hero">
-        <img src="logo.png" alt="שרון קרפס" class="logo-nav h-11 w-auto" />
+      <a href="#hero" class="flex items-center">
+        <img src="logo.png" alt="שרון קרפס" class="logo-blend h-12 w-auto" />
       </a>
-      <!-- Desktop nav -->
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-        <a href="#hero"         class="nav-link hover:text-[#5C6B3A]">דף הבית</a>
-        <a href="#about"        class="nav-link hover:text-[#5C6B3A]">מי אני</a>
-        <a href="#services"     class="nav-link hover:text-[#5C6B3A]">שירותים</a>
-        <a href="#testimonials" class="nav-link hover:text-[#5C6B3A]">המלצות</a>
-        <a href="#faq"          class="nav-link hover:text-[#5C6B3A]">שאלות נפוצות</a>
-        <a href="#contact"      class="nav-link hover:text-[#5C6B3A]">יצירת קשר</a>
+      <nav class="hidden md:flex items-center gap-7">
+        <a href="#hero"         class="nav-line text-gray-600 hover:text-[#2C3E35] font-medium text-sm">דף הבית</a>
+        <a href="#about"        class="nav-line text-gray-600 hover:text-[#2C3E35] font-medium text-sm">מי אני</a>
+        <a href="#services"     class="nav-line text-gray-600 hover:text-[#2C3E35] font-medium text-sm">שירותים</a>
+        <a href="#testimonials" class="nav-line text-gray-600 hover:text-[#2C3E35] font-medium text-sm">המלצות</a>
+        <a href="#faq"          class="nav-line text-gray-600 hover:text-[#2C3E35] font-medium text-sm">שאלות נפוצות</a>
+        <a href="#contact"      class="nav-line text-gray-600 hover:text-[#2C3E35] font-medium text-sm">יצירת קשר</a>
       </nav>
-      <!-- Mobile burger -->
-      <button id="burger" class="md:hidden p-2 flex flex-col gap-1.5" aria-label="תפריט">
-        <span class="block w-5 h-0.5 bg-gray-600 rounded"></span>
-        <span class="block w-5 h-0.5 bg-gray-600 rounded"></span>
-        <span class="block w-5 h-0.5 bg-gray-600 rounded"></span>
-      </button>
+      <div class="flex items-center gap-2">
+        <a href="#contact" class="hidden sm:inline-block bg-[#2C3E35] text-white px-4 py-2 rounded-full hover:bg-[#3d5445] transition text-sm font-semibold whitespace-nowrap">לתיאום שיחת היכרות ללא התחייבות</a>
+        <button id="burger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="תפריט">
+          <span class="block w-6 h-0.5 bg-[#2C3E35] rounded"></span>
+          <span class="block w-6 h-0.5 bg-[#2C3E35] rounded"></span>
+          <span class="block w-6 h-0.5 bg-[#2C3E35] rounded"></span>
+        </button>
+      </div>
     </div>
   </div>
 </header>
 
 <!-- Mobile menu -->
-<div id="mob-overlay" class="fixed inset-0 z-40 bg-black/30 hidden" onclick="closeMobile()"></div>
-<div id="mob-menu" class="fixed top-0 right-0 z-50 w-64 h-full bg-white shadow-xl pt-20 px-7 translate-x-full transition-transform duration-300">
-  <a href="#hero"         onclick="closeMobile()" class="block py-3.5 text-base font-medium text-gray-700 border-b border-gray-100">דף הבית</a>
-  <a href="#about"        onclick="closeMobile()" class="block py-3.5 text-base font-medium text-gray-700 border-b border-gray-100">מי אני</a>
-  <a href="#services"     onclick="closeMobile()" class="block py-3.5 text-base font-medium text-gray-700 border-b border-gray-100">שירותים</a>
-  <a href="#testimonials" onclick="closeMobile()" class="block py-3.5 text-base font-medium text-gray-700 border-b border-gray-100">המלצות</a>
-  <a href="#faq"          onclick="closeMobile()" class="block py-3.5 text-base font-medium text-gray-700 border-b border-gray-100">שאלות נפוצות</a>
-  <a href="#contact"      onclick="closeMobile()" class="block py-3.5 text-base font-bold text-[#5C6B3A]">יצירת קשר</a>
+<div id="mob-overlay" class="fixed inset-0 z-40 bg-black/40 hidden" onclick="closeMobile()"></div>
+<div id="mob-menu" class="fixed top-0 right-0 z-50 w-72 h-full bg-white shadow-xl pt-20 px-8 translate-x-full transition-transform duration-300">
+  <a href="#hero"         onclick="closeMobile()" class="block py-4 text-lg font-medium text-[#2C3E35] border-b border-gray-100">דף הבית</a>
+  <a href="#about"        onclick="closeMobile()" class="block py-4 text-lg font-medium text-[#2C3E35] border-b border-gray-100">מי אני</a>
+  <a href="#services"     onclick="closeMobile()" class="block py-4 text-lg font-medium text-[#2C3E35] border-b border-gray-100">שירותים</a>
+  <a href="#testimonials" onclick="closeMobile()" class="block py-4 text-lg font-medium text-[#2C3E35] border-b border-gray-100">המלצות</a>
+  <a href="#faq"          onclick="closeMobile()" class="block py-4 text-lg font-medium text-[#2C3E35] border-b border-gray-100">שאלות נפוצות</a>
+  <a href="#contact"      onclick="closeMobile()" class="block py-4 text-lg font-bold text-[#8A6F4D]">יצירת קשר</a>
 </div>
 
 <!-- HERO -->
-<section id="hero" class="pt-16">
-  <div class="w-full h-[55vh] md:h-[75vh] overflow-hidden">
-    <img src="sharon-main.jpg" alt="שרון קרפס" class="w-full h-full object-cover object-top" />
-  </div>
-  <div class="bg-white py-10 md:py-14 px-5 text-center fade-in">
-    <p class="text-xs font-semibold tracking-widest text-[#8A7355] uppercase mb-4">מדריכת הורים &nbsp;|&nbsp; מומחית משפחה והורות לגיל הרך &nbsp;|&nbsp; מוסמכת מכון אדלר</p>
-    <h1 class="text-3xl md:text-5xl font-bold text-[#3A3A3A] leading-snug mb-4">להחזיר את השלווה לסלון</h1>
-    <p class="text-base md:text-lg text-gray-500 max-w-xl mx-auto leading-relaxed mb-7">כלים פרקטיים להורות רגועה ומקרבת בגיל הרך. ליווי אישי וקבוצתי בגישת אדלר להורים לילדים בגילאי 2–6.</p>
-    <a href="#contact" class="inline-block bg-[#5C6B3A] text-white px-8 py-3.5 rounded-full text-sm font-semibold hover:bg-[#4a5630] transition shadow-sm">לתיאום שיחת היכרות ללא התחייבות</a>
-  </div>
-</section>
-
-<!-- FEATURES STRIP -->
-<section class="bg-[#F5F1EB] py-12 md:py-16 px-5">
-  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 fade-in">
-    <div class="text-center">
-      <img src="icon-parent-child.png" alt="" class="w-12 h-12 mx-auto mb-3 object-contain" />
-      <h3 class="font-bold text-[#3A3A3A] text-sm md:text-base mb-1">להורים לילדים בגיל הרך</h3>
-      <p class="text-xs md:text-sm text-gray-500 leading-relaxed">הדרכות פרטניות וקבוצתיות להורים לילדים בגילאי 2–6</p>
+<section id="hero" class="bg-gradient-to-b from-[#F7F2EC] to-white px-4 pt-24 pb-16 md:pt-32 md:pb-28">
+  <div class="max-w-6xl mx-auto flex flex-col-reverse md:grid md:grid-cols-2 gap-10 md:gap-12 items-center">
+    <div class="text-right fade-in">
+      <span class="inline-block bg-[#e9ede6] text-[#4a6741] text-xs font-bold px-4 py-1.5 rounded-full mb-5">מדריכת הורים | מומחית משפחה והורות לגיל הרך, מוסמכת מכון אדלר</span>
+      <h1 class="text-3xl md:text-5xl font-bold text-[#2C3E35] leading-tight mb-4">להחזיר את השלווה לסלון</h1>
+      <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-8">כלים פרקטיים להורות רגועה ומקרבת בגיל הרך. ליווי אישי וקבוצתי בגישת אדלר להורים לילדים בגילאי 2 עד 6. בואו נהפוך את הבית למקום של שיתוף פעולה ורוגע — בלי מאבקים מיותרים.</p>
+      <div class="flex flex-col sm:flex-row-reverse gap-3">
+        <a href="#contact" class="bg-[#2C3E35] text-white px-7 py-3.5 rounded-full text-center hover:bg-[#3d5445] transition font-semibold shadow-md">לתיאום שיחת היכרות ללא התחייבות</a>
+        <a href="#services" class="border-2 border-[#2C3E35] text-[#2C3E35] px-7 py-3.5 rounded-full text-center hover:bg-[#2C3E35] hover:text-white transition font-semibold">לשירותים שלי</a>
+      </div>
+      <div class="flex gap-8 mt-8 justify-end">
+        <div class="text-center"><div class="text-2xl font-bold text-[#2C3E35]">10+</div><div class="text-xs text-gray-500 mt-0.5">שנות ניסיון</div></div>
+        <div class="text-center"><div class="text-2xl font-bold text-[#2C3E35]">200+</div><div class="text-xs text-gray-500 mt-0.5">משפחות</div></div>
+        <div class="text-center"><div class="text-2xl font-bold text-[#2C3E35]">2–6</div><div class="text-xs text-gray-500 mt-0.5">גיל הילדים</div></div>
+      </div>
     </div>
-    <div class="text-center">
-      <img src="icon-house.png" alt="" class="w-12 h-12 mx-auto mb-3 object-contain" />
-      <h3 class="font-bold text-[#3A3A3A] text-sm md:text-base mb-1">כלים לחיי היום יום</h3>
-      <p class="text-xs md:text-sm text-gray-500 leading-relaxed">פרקטיים, יישומיים ומבוססי ניסיון</p>
-    </div>
-    <div class="text-center">
-      <img src="icon-plant.png" alt="" class="w-12 h-12 mx-auto mb-3 object-contain" />
-      <h3 class="font-bold text-[#3A3A3A] text-sm md:text-base mb-1">ליווי מותאם אישית</h3>
-      <p class="text-xs md:text-sm text-gray-500 leading-relaxed">הבנה עמוקה של הצרכים של המשפחה שלכם</p>
-    </div>
-    <div class="text-center">
-      <img src="icon-hands.png" alt="" class="w-12 h-12 mx-auto mb-3 object-contain" />
-      <h3 class="font-bold text-[#3A3A3A] text-sm md:text-base mb-1">גישה אדלריאנית</h3>
-      <p class="text-xs md:text-sm text-gray-500 leading-relaxed">אמונה ביכולות, כבוד הדדי ושיתוף פעולה</p>
+    <div class="flex justify-center fade-in">
+      <div class="relative w-full max-w-sm md:max-w-md">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#c8d5c3] to-[#EADFD2] rounded-3xl rotate-3 scale-95 opacity-60"></div>
+        <div class="relative w-full h-72 md:h-[420px] rounded-3xl overflow-hidden shadow-xl">
+          <img src="sharon-main.jpg" alt="שרון קרפס" class="w-full h-full object-cover object-top" />
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- HEART DIVIDER -->
-<div class="flex justify-center py-10">
-  <img src="icon-heart.png" alt="" class="w-8 h-8 object-contain opacity-60" />
-</div>
+<!-- ACCESSIBILITY STRIP -->
+<section class="bg-[#e9ede6] py-5 px-4">
+  <div class="max-w-4xl mx-auto flex items-center justify-center gap-3 text-center">
+    <img src="icon-house.png" alt="" class="w-7 h-7 object-contain" />
+    <p class="text-[#2C3E35] font-semibold text-sm md:text-base">ליווי נגיש ונוח — בזום או במפגשים פרונטליים, בישראל ובחו"ל</p>
+  </div>
+</section>
 
-<!-- MESSAGE SECTION -->
-<section class="px-5 pb-14 fade-in">
-  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-    <div class="rounded-2xl overflow-hidden h-64 md:h-80 shadow-sm">
-      <img src="sharon.jpg" alt="שרון קרפס" class="w-full h-full object-cover object-top" />
+<!-- PAINS -->
+<section id="pains" class="py-16 md:py-20 px-4 bg-[#2C3E35]">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 fade-in">
+      <span class="inline-block bg-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">מה מביא הורים אלי</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-white">אולי זה מוכר לכם?</h2>
     </div>
-    <div class="text-center md:col-span-1 px-2">
-      <h2 class="text-2xl md:text-3xl font-bold text-[#3A3A3A] leading-snug mb-5">הורות היא מסע שלא אמור להרגיש כמו מאבק מתמשך</h2>
-      <p class="text-sm text-gray-500 leading-relaxed mb-3">בית רגוע יותר מתוך הבנה של הצרכים של כל אחד ואחת מבני הבית, ומתוך יצירה של משהו חדש, רגוע וכן יותר עבורכם.</p>
-      <p class="text-sm text-gray-500 leading-relaxed">אתם לא צריכים לעבור את המסע הזה לבד, אני כאן ללוות אתכם בדרך של שיתוף, קירבה ורוגע בבית.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- PAINS -->
+      <div class="fade-in bg-white/10 border border-white/20 rounded-3xl p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <img src="icon-parent-child.png" alt="" class="w-10 h-10 object-contain" />
+          <h3 class="text-lg md:text-xl font-bold text-white">הקושי שמביא אתכם</h3>
+        </div>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#a8c8a0] flex-shrink-0 mt-2"></span><span class="text-white/85 text-sm leading-relaxed">אתם מצליחים בכל תחום בחיים — ודווקא בבית מרגישים אבודים</span></li>
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#a8c8a0] flex-shrink-0 mt-2"></span><span class="text-white/85 text-sm leading-relaxed">מוצאים את עצמכם צועקים — ואחר כך מרגישים נורא על זה</span></li>
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#a8c8a0] flex-shrink-0 mt-2"></span><span class="text-white/85 text-sm leading-relaxed">אומרים "לא" ואז מתרככים, או מציבים גבול ולא יודעים איך לעמוד בו</span></li>
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#a8c8a0] flex-shrink-0 mt-2"></span><span class="text-white/85 text-sm leading-relaxed">לא מבינים למה הוא מתפרץ, מסרב או בוכה — ואיך אפשר אחרת</span></li>
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#a8c8a0] flex-shrink-0 mt-2"></span><span class="text-white/85 text-sm leading-relaxed">הבית מרגיש עייף — ומשם זה מגיע גם לזוגיות</span></li>
+        </ul>
+      </div>
+      <!-- SOLUTIONS -->
+      <div class="fade-in bg-[#e9ede6] rounded-3xl p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <img src="icon-plant.png" alt="" class="w-10 h-10 object-contain" />
+          <h3 class="text-lg md:text-xl font-bold text-[#2C3E35]">אחרי התהליך אתם תרגישו</h3>
+        </div>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#8A6F4D] flex-shrink-0 mt-2"></span><span class="text-[#2C3E35] text-sm leading-relaxed">שקט נפשי אמיתי — סוף סוף מרגישים שאתם יודעים מה אתם עושים</span></li>
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#8A6F4D] flex-shrink-0 mt-2"></span><span class="text-[#2C3E35] text-sm leading-relaxed">מבינים את הילד שלכם — את מה שמסתתר מאחורי ההתנהגות</span></li>
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#8A6F4D] flex-shrink-0 mt-2"></span><span class="text-[#2C3E35] text-sm leading-relaxed">כלים שעובדים — לא תיאוריה, אלא דברים שאפשר ליישם כבר הערב</span></li>
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#8A6F4D] flex-shrink-0 mt-2"></span><span class="text-[#2C3E35] text-sm leading-relaxed">פחות אשמה, יותר חמלה — כלפי הילד וכלפי עצמכם</span></li>
+          <li class="flex items-start gap-3 text-right"><span class="w-2 h-2 rounded-full bg-[#8A6F4D] flex-shrink-0 mt-2"></span><span class="text-[#2C3E35] text-sm leading-relaxed">אווירה אחרת בבית — שינוי שמורגש ביחסים, בזוגיות ובכל המשפחה</span></li>
+        </ul>
+      </div>
     </div>
-    <div class="rounded-2xl overflow-hidden h-64 md:h-80 shadow-sm">
+    <!-- Couple evening image -->
+    <div class="fade-in mt-8 rounded-3xl overflow-hidden shadow-xl max-h-72 md:max-h-80">
+      <img src="couple.jpg" alt="זוג רגוע בסלון" class="w-full h-full object-cover object-center" style="object-position:center 30%" />
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-16 md:py-20 px-4 bg-white">
+  <div class="max-w-5xl mx-auto flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <div class="relative fade-in w-full">
+      <div class="w-full overflow-hidden shadow-xl" style="aspect-ratio:4/5;border-radius:8px 64px 8px 64px">
+        <img src="sharon.jpg" alt="שרון קרפס" class="w-full h-full object-cover object-top" />
+      </div>
+      <div class="absolute -bottom-5 -right-2 md:-right-4 bg-white rounded-2xl shadow-lg p-4 max-w-[200px] md:max-w-[220px]">
+        <p class="text-xs md:text-sm italic text-gray-700 leading-relaxed">"הילד אינו פרויקט לתיקון, וההורה אינו כישלון כשהוא מתקשה"</p>
+        <span class="text-xs text-[#8A6F4D] font-semibold mt-2 block">— שרון קרפס</span>
+      </div>
+    </div>
+    <div class="text-right fade-in mt-6 md:mt-0">
+      <span class="inline-block bg-[#e9ede6] text-[#4a6741] text-xs font-bold px-4 py-1.5 rounded-full mb-4">מי אני</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#2C3E35] mb-6 leading-tight">קצת עליי, <span class="text-[#8A6F4D] italic">שרון קרפס</span></h2>
+      <div class="space-y-4 text-gray-600 leading-relaxed text-sm md:text-base">
+        <p>שלום, אני שרון קרפס, מומחית משפחה והורות לגיל הרך, מוסמכת מכון אדלר.</p>
+        <p>אני מאמינה שהילד הוא לא פרויקט לתיקון, וההורה הוא לא כישלון. משפחה היא מערכת יחסים חיה, וכשמבינים מה באמת קורה מתחת להתנהגות — אפשר להתחיל ליצור שינוי עמוק, בלי מלחמות מיותרות ובלי אשמה.</p>
+        <p>עבדתי עם מאות משפחות בישראל ובניו יורק. גישתי מבוססת על שיוויוניות, הומור ואמפתיה — אני מלווה גם אמהות וגם אבות, כי הורות טובה היא שותפות.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mt-8">
+        <div class="bg-[#F7F2EC] border border-[#efe4d8] rounded-xl px-3 py-3 flex items-center gap-2">
+          <img src="icon-house.png" alt="" class="w-7 h-7 object-contain flex-shrink-0" />
+          <span class="text-xs md:text-sm font-semibold text-[#2C3E35]">ניסיון עם משפחות מהארץ והעולם</span>
+        </div>
+        <div class="bg-[#F7F2EC] border border-[#efe4d8] rounded-xl px-3 py-3 flex items-center gap-2">
+          <span class="text-lg flex-shrink-0">🎓</span>
+          <span class="text-xs md:text-sm font-semibold text-[#2C3E35]">בוגרת מכון אדלר ובית הספר למקצועות ההורות</span>
+        </div>
+        <div class="bg-[#F7F2EC] border border-[#efe4d8] rounded-xl px-3 py-3 flex items-center gap-2">
+          <img src="icon-parent-child.png" alt="" class="w-7 h-7 object-contain flex-shrink-0" />
+          <span class="text-xs md:text-sm font-semibold text-[#2C3E35]">כלים פרקטיים ליישום מיידי</span>
+        </div>
+        <div class="bg-[#F7F2EC] border border-[#efe4d8] rounded-xl px-3 py-3 flex items-center gap-2">
+          <span class="text-lg flex-shrink-0">🚨</span>
+          <span class="text-xs md:text-sm font-semibold text-[#2C3E35]">יוזמת מערך ההסברה לילדים במצבי חירום</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Photo strip -->
+  <div class="max-w-5xl mx-auto mt-14 grid grid-cols-3 gap-3 md:gap-4 fade-in">
+    <div class="rounded-2xl overflow-hidden h-36 md:h-52 shadow-sm">
+      <img src="hug-dad.png" alt="אבא עם ילדו" class="w-full h-full object-cover object-top" />
+    </div>
+    <div class="rounded-2xl overflow-hidden h-36 md:h-52 shadow-sm">
+      <img src="family-fun.png" alt="משפחה משחקת יחד" class="w-full h-full object-cover" />
+    </div>
+    <div class="rounded-2xl overflow-hidden h-36 md:h-52 shadow-sm">
       <img src="hug-mom.png" alt="חיבוק אמא וילד" class="w-full h-full object-cover object-top" />
     </div>
   </div>
 </section>
 
-<!-- HEART DIVIDER -->
-<div class="flex justify-center py-4">
-  <img src="icon-heart.png" alt="" class="w-8 h-8 object-contain opacity-60" />
-</div>
-
-<!-- ABOUT -->
-<section id="about" class="py-14 px-5 bg-white">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-2xl md:text-3xl font-bold text-center text-[#3A3A3A] mb-10 fade-in">קצת עליי</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center fade-in">
-      <div class="rounded-2xl overflow-hidden shadow-md aspect-square max-w-xs mx-auto w-full">
-        <img src="sharon-main.jpg" alt="שרון קרפס" class="w-full h-full object-cover object-top" />
-      </div>
-      <div class="text-right space-y-4 text-gray-600 leading-relaxed text-sm md:text-base">
-        <p>שלום, אני שרון קרפס, מומחית משפחה והורות לגיל הרך, מוסמכת מכון אדלר.</p>
-        <p>אני מאמינה שהילד אינו פרויקט לתיקון, וההורה אינו כישלון. משפחה היא מערכת יחסים חיה, וכשמבינים מה באמת קורה מתחת להתנהגות — אפשר להתחיל ליצור שינוי עמוק, בלי מלחמות מיותרות ובלי אשמה.</p>
-        <p>עבדתי עם מאות משפחות בישראל ובניו יורק. גישתי מבוססת על שיוויוניות, הומור ואמפתיה — אני מלווה גם אמהות וגם אבות, כי הורות טובה היא שותפות.</p>
-        <div class="grid grid-cols-2 gap-3 pt-2">
-          <div class="flex items-center gap-2 text-xs text-gray-500"><img src="icon-plant.png" alt="" class="w-5 h-5 object-contain" />מעל מעשור שנות ניסיון</div>
-          <div class="flex items-center gap-2 text-xs text-gray-500"><span>🎓</span>בוגרת מכון אדלר</div>
-          <div class="flex items-center gap-2 text-xs text-gray-500"><img src="icon-house.png" alt="" class="w-5 h-5 object-contain" />משפחות בישראל ובניו יורק</div>
-          <div class="flex items-center gap-2 text-xs text-gray-500"><span>🚨</span>יוזמת מערך הסברה למצבי חירום</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HEART DIVIDER -->
-<div class="flex justify-center py-10">
-  <img src="icon-heart.png" alt="" class="w-8 h-8 object-contain opacity-60" />
-</div>
-
-<!-- PAINS -->
-<section class="px-5 pb-16 fade-in">
-  <div class="max-w-3xl mx-auto text-center">
-    <h2 class="text-2xl md:text-3xl font-bold text-[#3A3A3A] mb-8">אולי זה מוכר לכם?</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
-      <div class="bg-[#F5F1EB] rounded-2xl p-5">
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-sm text-gray-600"><span class="w-1.5 h-1.5 rounded-full bg-[#8A7355] flex-shrink-0 mt-2"></span>אתם מצליחים בכל תחום בחיים — ודווקא בבית מרגישים אבודים</li>
-          <li class="flex items-start gap-3 text-sm text-gray-600"><span class="w-1.5 h-1.5 rounded-full bg-[#8A7355] flex-shrink-0 mt-2"></span>מוצאים את עצמכם צועקים — ואחר כך מרגישים נורא על זה</li>
-          <li class="flex items-start gap-3 text-sm text-gray-600"><span class="w-1.5 h-1.5 rounded-full bg-[#8A7355] flex-shrink-0 mt-2"></span>אומרים "לא" ואז מתרככים, או מציבים גבול ולא יודעים איך לעמוד בו</li>
-        </ul>
-      </div>
-      <div class="bg-[#F5F1EB] rounded-2xl p-5">
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-sm text-gray-600"><span class="w-1.5 h-1.5 rounded-full bg-[#8A7355] flex-shrink-0 mt-2"></span>לא מבינים למה הוא מתפרץ, מסרב או בוכה — ואיך אפשר אחרת</li>
-          <li class="flex items-start gap-3 text-sm text-gray-600"><span class="w-1.5 h-1.5 rounded-full bg-[#8A7355] flex-shrink-0 mt-2"></span>הבית מרגיש עייף — ומשם זה מגיע גם לזוגיות</li>
-          <li class="flex items-start gap-3 text-sm text-gray-600"><span class="w-1.5 h-1.5 rounded-full bg-[#8A7355] flex-shrink-0 mt-2"></span>הרבה עצות מכל כיוון — ולא ברור מה נכון בשביל הילד שלכם</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HEART DIVIDER -->
-<div class="flex justify-center py-4">
-  <img src="icon-heart.png" alt="" class="w-8 h-8 object-contain opacity-60" />
-</div>
-
 <!-- SERVICES -->
-<section id="services" class="py-14 px-5 bg-white">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="text-2xl md:text-3xl font-bold text-center text-[#3A3A3A] mb-10 fade-in">איך אפשר לעבוד יחד</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 fade-in">
-
-      <!-- Card 1 -->
-      <div class="service-card bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div class="h-44 overflow-hidden">
-          <img src="hug-mom.png" alt="" class="w-full h-full object-cover object-top" />
-        </div>
-        <div class="p-5 text-right">
-          <span class="inline-block bg-[#EAE6DF] text-[#6B5B3E] text-xs font-bold px-3 py-1 rounded-full mb-3">מהיר ויעיל</span>
-          <h3 class="font-bold text-[#3A3A3A] text-sm mb-1">שיחת ייעוץ ממוקדת</h3>
-          <p class="text-[#5C6B3A] text-xs font-semibold mb-2">300 ש"ח | 45 דקות בזום</p>
-          <p class="text-xs text-gray-500 leading-relaxed">כלים מעשיים ליישום מיידי בהתמודדות עם דילמה הורית ספציפית.</p>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="service-card bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div class="h-44 overflow-hidden">
-          <img src="hug-dad.png" alt="" class="w-full h-full object-cover object-top" />
-        </div>
-        <div class="p-5 text-right">
-          <span class="inline-block bg-[#EAE6DF] text-[#6B5B3E] text-xs font-bold px-3 py-1 rounded-full mb-3">עומק</span>
-          <h3 class="font-bold text-[#3A3A3A] text-sm mb-2">ליווי פרטני</h3>
-          <p class="text-xs text-gray-500 leading-relaxed">תהליך עומק (10–12 מפגשים) מותאם אישית לצרכי המשפחה שלכם.</p>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="service-card bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div class="h-44 overflow-hidden">
-          <img src="family-fun.png" alt="" class="w-full h-full object-cover" />
-        </div>
-        <div class="p-5 text-right">
-          <span class="inline-block bg-[#EAE6DF] text-[#6B5B3E] text-xs font-bold px-3 py-1 rounded-full mb-3">קבוצות</span>
-          <h3 class="font-bold text-[#3A3A3A] text-sm mb-2">קבוצות הורים</h3>
-          <p class="text-xs text-gray-500 leading-relaxed">סדרת מפגשים אינטימית להורים לילדים בגילאי 2 עד 6.</p>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="service-card bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div class="h-44 overflow-hidden relative">
-          <img src="couple.jpg" alt="" class="w-full h-full object-cover" style="object-position:center 30%" />
-          <span class="absolute top-3 left-3 bg-[#5C6B3A] text-white text-xs font-bold px-3 py-1 rounded-full">מומלץ</span>
-        </div>
-        <div class="p-5 text-right">
-          <span class="inline-block bg-[#EAE6DF] text-[#6B5B3E] text-xs font-bold px-3 py-1 rounded-full mb-3">חו"ל</span>
-          <h3 class="font-bold text-[#3A3A3A] text-sm mb-2">ליווי משפחות בחו"ל</h3>
-          <p class="text-xs text-gray-500 leading-relaxed">זום בהתאמה לאזור הזמן, כולל ביקורים במנהטן וניו ג'רזי.</p>
-        </div>
-      </div>
-
+<section id="services" class="py-16 md:py-20 px-4 bg-[#F9F7F4]">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 fade-in">
+      <span class="inline-block bg-[#e9ede6] text-[#4a6741] text-xs font-bold px-4 py-1.5 rounded-full mb-4">השירותים שלי</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#2C3E35]">איך אפשר לעבוד יחד</h2>
     </div>
-    <div class="text-center mt-10 fade-in">
-      <a href="#contact" class="inline-block bg-[#5C6B3A] text-white px-10 py-3.5 rounded-full font-semibold text-sm hover:bg-[#4a5630] transition shadow-sm">הצעד הראשון מתחיל כאן</a>
+    <!-- Featured: Private -->
+    <div class="fade-in bg-[#2C3E35] text-white rounded-3xl overflow-hidden mb-6 shadow-xl">
+      <div class="flex flex-col md:grid md:grid-cols-2">
+        <div class="p-7 md:p-10 text-right flex flex-col justify-center">
+          <div class="flex items-center justify-end gap-3 mb-4">
+            <span class="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">⭐ מומלץ ביותר</span>
+            <img src="icon-plant.png" alt="" class="w-8 h-8 object-contain" />
+          </div>
+          <h3 class="text-xl md:text-2xl font-bold mb-3">ליווי פרטני</h3>
+          <p class="text-white/80 leading-relaxed mb-5 text-sm md:text-base">תהליך עומק (10–12 מפגשים) מותאם אישית לצרכי המשפחה שלכם.</p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-center gap-2 text-sm text-white/85"><span class="text-green-400">✓</span> 10–12 מפגשים אישיים / זוגיים</li>
+            <li class="flex items-center gap-2 text-sm text-white/85"><span class="text-green-400">✓</span> בניית חזון הורי אישי</li>
+            <li class="flex items-center gap-2 text-sm text-white/85"><span class="text-green-400">✓</span> ארגז כלים פרקטי ומדויק</li>
+          </ul>
+          <a href="#contact" class="inline-block bg-white text-[#2C3E35] font-bold px-7 py-3 rounded-full hover:bg-[#F7F2EC] transition self-end text-sm md:text-base">לפרטים ולתיאום ←</a>
+        </div>
+        <div class="h-56 md:h-auto overflow-hidden">
+          <img src="couple.jpg" alt="זוגיות רגועה" class="w-full h-full object-cover" style="object-position:center 30%" />
+        </div>
+      </div>
+    </div>
+    <!-- 3 cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- Consultation -->
+      <div class="fade-in bg-white rounded-3xl p-6 shadow-sm border border-[#eee7df] text-right">
+        <img src="icon-parent-child.png" alt="" class="w-10 h-10 object-contain mb-4 mr-auto" />
+        <span class="inline-block bg-[#e9ede6] text-[#4a6741] text-xs font-bold px-3 py-1 rounded-full mb-3">מהיר ויעיל</span>
+        <h3 class="text-lg md:text-xl font-bold text-[#2C3E35] mb-1">שיחת ייעוץ ממוקדת</h3>
+        <p class="text-[#8A6F4D] font-bold text-sm mb-3">300 ש"ח | 45 דקות בזום</p>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">כלים מעשיים ליישום מיידי בהתמודדות עם דילמה הורית ספציפית.</p>
+        <ul class="space-y-1.5">
+          <li class="flex items-center gap-2 text-sm text-gray-500"><span class="text-[#8A6F4D]">✓</span> 45 דקות בזום</li>
+          <li class="flex items-center gap-2 text-sm text-gray-500"><span class="text-[#8A6F4D]">✓</span> פתרון לדילמה ספציפית</li>
+          <li class="flex items-center gap-2 text-sm text-gray-500"><span class="text-[#8A6F4D]">✓</span> ללא התחייבות</li>
+        </ul>
+      </div>
+      <!-- Groups -->
+      <div class="fade-in bg-white rounded-3xl p-6 shadow-sm border border-[#eee7df] text-right">
+        <img src="icon-hands.png" alt="" class="w-10 h-10 object-contain mb-4 mr-auto" />
+        <span class="inline-block bg-[#e9ede6] text-[#4a6741] text-xs font-bold px-3 py-1 rounded-full mb-3">קבוצות</span>
+        <h3 class="text-lg md:text-xl font-bold text-[#2C3E35] mb-3">קבוצות הורים</h3>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">סדרת מפגשים אינטימית להורים לילדים בגילאי 2 עד 6.</p>
+        <ul class="space-y-1.5">
+          <li class="flex items-center gap-2 text-sm text-gray-500"><span class="text-[#8A6F4D]">✓</span> 5 מפגשים ממוקדים לנושא</li>
+          <li class="flex items-center gap-2 text-sm text-gray-500"><span class="text-[#8A6F4D]">✓</span> 10 מפגשים מורחבים</li>
+          <li class="flex items-center gap-2 text-sm text-gray-500"><span class="text-[#8A6F4D]">✓</span> 8–10 זוגות בקבוצה</li>
+        </ul>
+      </div>
+      <!-- Abroad -->
+      <div class="fade-in bg-white rounded-3xl p-6 shadow-sm border border-[#eee7df] text-right">
+        <img src="icon-house.png" alt="" class="w-10 h-10 object-contain mb-4 mr-auto" />
+        <span class="inline-block bg-[#e9ede6] text-[#4a6741] text-xs font-bold px-3 py-1 rounded-full mb-3">חו"ל</span>
+        <h3 class="text-lg md:text-xl font-bold text-[#2C3E35] mb-3">ליווי משפחות בחו"ל</h3>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">מפגשי זום בהתאמה לאזור הזמן שלכם, כולל אפשרות לביקורים במנהטן וניו ג'רזי.</p>
+        <ul class="space-y-1.5">
+          <li class="flex items-center gap-2 text-sm text-gray-500"><span class="text-[#8A6F4D]">✓</span> זום בהתאמה לכל אזור זמן</li>
+          <li class="flex items-center gap-2 text-sm text-gray-500"><span class="text-[#8A6F4D]">✓</span> ביקורים במנהטן וניו ג'רזי</li>
+          <li class="flex items-center gap-2 text-sm text-gray-500"><span class="text-[#8A6F4D]">✓</span> ניסיון עם ישראלים בחו"ל</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
-
-<!-- HEART DIVIDER -->
-<div class="flex justify-center py-10">
-  <img src="icon-heart.png" alt="" class="w-8 h-8 object-contain opacity-60" />
-</div>
 
 <!-- LEAD MAGNET -->
-<section class="px-5 pb-16 fade-in">
-  <div class="max-w-2xl mx-auto bg-[#F5F1EB] rounded-3xl p-8 md:p-10 text-right">
-    <div class="flex items-center justify-end gap-3 mb-4">
-      <span class="text-xs font-bold text-[#8A7355] uppercase tracking-wider">מדריך חינמי</span>
-      <img src="icon-heart.png" alt="" class="w-6 h-6 object-contain" />
+<section id="lead-magnet" class="py-16 md:py-20 px-4 bg-white">
+  <div class="max-w-3xl mx-auto fade-in">
+    <div class="bg-gradient-to-br from-[#2C3E35] to-[#3d5445] rounded-3xl p-8 md:p-12 text-right shadow-xl relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-40 h-40 bg-white/5 rounded-full -translate-x-16 -translate-y-16"></div>
+      <div class="absolute bottom-0 right-0 w-64 h-64 bg-white/5 rounded-full translate-x-20 translate-y-20"></div>
+      <div class="relative z-10">
+        <div class="flex items-center justify-end gap-3 mb-5">
+          <span class="inline-block bg-[#8A6F4D] text-white text-xs font-bold px-4 py-1.5 rounded-full">מדריך חינמי</span>
+          <img src="icon-heart.png" alt="" class="w-8 h-8 object-contain" />
+        </div>
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">"מה הילד שלי באמת צריך עכשיו?"</h2>
+        <p class="text-white/80 leading-relaxed mb-6 text-sm md:text-base">כלי עבודה קצר וזכיר — שיטת "הרגש כיועץ". הוא עוזר לכם להבין את המטרה של הילד דרך מה שאתם מרגישים באותו רגע (תשומת לב, מאבק כוח או ייאוש) ונותן לכם פעולה אחת פשוטה ליישום מיידי.</p>
+        <form onsubmit="submitLeadMagnet(event)" class="flex flex-col sm:flex-row-reverse gap-3">
+          <input type="email" required placeholder="כתובת האימייל שלכם" class="flex-1 rounded-xl px-4 py-3 text-right text-[#2C3E35] focus:outline-none focus:ring-2 focus:ring-[#8A6F4D] text-base" />
+          <button type="submit" class="bg-[#8A6F4D] text-white px-7 py-3 rounded-xl font-bold hover:bg-[#7a6040] transition whitespace-nowrap">שלחו לי את המדריך ←</button>
+        </form>
+        <p id="lead-success" class="hidden text-green-300 font-semibold mt-3 text-sm">המדריך בדרך! בדקו את תיבת הדואר שלכם.</p>
+      </div>
     </div>
-    <h2 class="text-xl md:text-2xl font-bold text-[#3A3A3A] mb-3">"מה הילד שלי באמת צריך עכשיו?"</h2>
-    <p class="text-sm text-gray-600 leading-relaxed mb-6">כלי עבודה קצר וזכיר — שיטת "הרגש כיועץ". עוזר לכם להבין את המטרה של הילד דרך מה שאתם מרגישים באותו רגע ונותן פעולה אחת פשוטה ליישום מיידי.</p>
-    <form onsubmit="submitLeadMagnet(event)" class="flex flex-col sm:flex-row-reverse gap-3">
-      <input type="email" required placeholder="האימייל שלכם" class="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-3 text-right text-sm focus:outline-none focus:ring-2 focus:ring-[#5C6B3A]" />
-      <button type="submit" class="bg-[#5C6B3A] text-white px-6 py-3 rounded-xl font-semibold text-sm hover:bg-[#4a5630] transition whitespace-nowrap">שלחו לי את המדריך ←</button>
-    </form>
-    <p id="lead-success" class="hidden text-[#5C6B3A] font-semibold mt-3 text-sm">המדריך בדרך! בדקו את תיבת הדואר.</p>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="testimonials" class="py-14 px-5 bg-[#F5F1EB]">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-2xl md:text-3xl font-bold text-center text-[#3A3A3A] mb-10 fade-in">מה הורים מספרים</h2>
+<section id="testimonials" class="py-16 md:py-20 px-4 bg-[#F9F7F4]">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 fade-in">
+      <span class="inline-block bg-[#e9ede6] text-[#4a6741] text-xs font-bold px-4 py-1.5 rounded-full mb-4">המלצות</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#2C3E35]">מה הורים מספרים</h2>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="fade-in bg-white rounded-2xl p-6 text-right shadow-sm">
-        <img src="icon-heart.png" alt="" class="w-7 h-7 object-contain mb-3 opacity-50" />
-        <div class="text-amber-400 text-xs mb-3">★★★★★</div>
-        <p class="text-sm text-gray-600 leading-relaxed mb-4">למדתי להקשיב בלי לשפוט. שרון נתנה לי כלים שעברו איתי לכל מצב — ואני מרגיש שינוי אמיתי בקשר עם הילדים שלי.</p>
-        <p class="font-bold text-[#3A3A3A] text-sm">עומר</p>
-        <p class="text-xs text-gray-400 mt-0.5">אבא לילדים בני 3 ו-5</p>
+      <div class="fade-in bg-white rounded-3xl p-7 border border-[#eee7df] relative text-right shadow-sm">
+        <img src="icon-heart.png" alt="" class="absolute top-5 right-6 w-10 h-10 object-contain opacity-40" />
+        <div class="text-yellow-400 mb-3 text-sm">★★★★★</div>
+        <p class="text-gray-700 leading-relaxed mb-5 text-sm">למדתי להקשיב בלי לשפוט. שרון נתנה לי כלים שעברו איתי לכל מצב — ואני מרגיש שינוי אמיתי בקשר עם הילדים שלי.</p>
+        <p class="font-bold text-[#2C3E35] text-sm">עומר</p>
+        <p class="text-xs text-gray-500 mt-0.5">אבא לילדים בני 3 ו-5</p>
       </div>
-      <div class="fade-in bg-white rounded-2xl p-6 text-right shadow-sm">
-        <img src="icon-heart.png" alt="" class="w-7 h-7 object-contain mb-3 opacity-50" />
-        <div class="text-amber-400 text-xs mb-3">★★★★★</div>
-        <p class="text-sm text-gray-600 leading-relaxed mb-4">האווירה בבית השתנתה לגמרי. פחות מתחים, יותר חיבוק — שרון ראתה מה שאני לא הצלחתי לראות לבד.</p>
-        <p class="font-bold text-[#3A3A3A] text-sm">נועה</p>
-        <p class="text-xs text-gray-400 mt-0.5">אמא לילדה בת 2.5</p>
+      <div class="fade-in bg-white rounded-3xl p-7 border border-[#eee7df] relative text-right shadow-sm">
+        <img src="icon-heart.png" alt="" class="absolute top-5 right-6 w-10 h-10 object-contain opacity-40" />
+        <div class="text-yellow-400 mb-3 text-sm">★★★★★</div>
+        <p class="text-gray-700 leading-relaxed mb-5 text-sm">האווירה בבית השתנתה לגמרי. פחות מתחים, יותר חיבוק — גם בי וגם בסלון. שרון ראתה מה שאני לא הצלחתי לראות לבד.</p>
+        <p class="font-bold text-[#2C3E35] text-sm">נועה</p>
+        <p class="text-xs text-gray-500 mt-0.5">אמא לילדה בת 2.5</p>
       </div>
-      <div class="fade-in bg-white rounded-2xl p-6 text-right shadow-sm">
-        <img src="icon-heart.png" alt="" class="w-7 h-7 object-contain mb-3 opacity-50" />
-        <div class="text-amber-400 text-xs mb-3">★★★★★</div>
-        <p class="text-sm text-gray-600 leading-relaxed mb-4">סדר וכלים פרקטיים שעובדים. הגעתי עם שאלות מעורפלות ויצאתי עם מפה ברורה — דברים שאני מיישם כל יום.</p>
-        <p class="font-bold text-[#3A3A3A] text-sm">אסף</p>
-        <p class="text-xs text-gray-400 mt-0.5">אבא לילדים בני 3 ו-6</p>
+      <div class="fade-in bg-white rounded-3xl p-7 border border-[#eee7df] relative text-right shadow-sm">
+        <img src="icon-heart.png" alt="" class="absolute top-5 right-6 w-10 h-10 object-contain opacity-40" />
+        <div class="text-yellow-400 mb-3 text-sm">★★★★★</div>
+        <p class="text-gray-700 leading-relaxed mb-5 text-sm">סדר וכלים פרקטיים שעובדים. הגעתי עם שאלות מעורפלות ויצאתי עם מפה ברורה. לא תיאוריה — דברים שאני מיישם כל יום.</p>
+        <p class="font-bold text-[#2C3E35] text-sm">אסף</p>
+        <p class="text-xs text-gray-500 mt-0.5">אבא לילדים בני 3 ו-6</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="py-14 px-5 bg-white">
-  <div class="max-w-2xl mx-auto">
-    <h2 class="text-2xl md:text-3xl font-bold text-center text-[#3A3A3A] mb-10 fade-in">שאלות נפוצות</h2>
-    <div class="space-y-3 fade-in">
-      <div class="border border-gray-200 rounded-2xl overflow-hidden">
-        <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-gray-50 transition">
-          <span class="font-semibold text-[#3A3A3A] text-sm md:text-base">למי ההדרכה מתאימה?</span>
-          <span class="plus text-[#5C6B3A] text-2xl font-light flex-shrink-0">+</span>
-        </button>
-        <div class="faq-answer px-6 text-sm text-gray-500 leading-relaxed">
-          <div class="pb-4">ההדרכה מתאימה להורים לילדים בגיל הרך (2–6) שמרגישים עומס, שחיקה, קושי סביב גבולות, התקפי זעם, שינה, אחים או אווירה כללית בבית.</div>
+<section id="faq" class="py-16 md:py-20 px-4 bg-white">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-right mb-10 fade-in">
+      <span class="inline-block bg-[#e9ede6] text-[#4a6741] text-xs font-bold px-4 py-1.5 rounded-full mb-4">שאלות נפוצות</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#2C3E35]">יש לכם שאלות?</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
+      <div class="space-y-3">
+        <div class="fade-in bg-[#F9F7F4] rounded-2xl border border-[#eee7df] overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-[#faf8f5] transition">
+            <span class="text-base md:text-lg font-semibold text-[#2C3E35]">למי ההדרכה מתאימה?</span>
+            <span class="plus text-[#8A6F4D] text-2xl font-light flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6 text-gray-600 leading-relaxed text-right text-sm">
+            <div class="pb-4">ההדרכה מתאימה להורים לילדים בגיל הרך (2–6) שמרגישים עומס, שחיקה, קושי סביב גבולות, התקפי זעם, שיתוף פעולה, שינה, אחים או אווירה כללית בבית.</div>
+          </div>
+        </div>
+        <div class="fade-in bg-[#F9F7F4] rounded-2xl border border-[#eee7df] overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-[#faf8f5] transition">
+            <span class="text-base md:text-lg font-semibold text-[#2C3E35]">צריך להגיע עם בעיה מוגדרת?</span>
+            <span class="plus text-[#8A6F4D] text-2xl font-light flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6 text-gray-600 leading-relaxed text-right text-sm">
+            <div class="pb-4">לא. לפעמים מגיעים כי יש קושי מאוד ברור, ולפעמים פשוט כי משהו בבית מרגיש לא נעים. גם זה מספיק כדי להתחיל תהליך.</div>
+          </div>
+        </div>
+        <div class="fade-in bg-[#F9F7F4] rounded-2xl border border-[#eee7df] overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-[#faf8f5] transition">
+            <span class="text-base md:text-lg font-semibold text-[#2C3E35]">אפשר גם בזום?</span>
+            <span class="plus text-[#8A6F4D] text-2xl font-light flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6 text-gray-600 leading-relaxed text-right text-sm">
+            <div class="pb-4">כן. כל המפגשים אפשר לקיים גם בזום — בצורה נוחה, נגישה ואפקטיבית מאוד. אני עובדת עם משפחות בכל הארץ ועם ישראלים בחו"ל.</div>
+          </div>
+        </div>
+        <div class="fade-in bg-[#F9F7F4] rounded-2xl border border-[#eee7df] overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-[#faf8f5] transition">
+            <span class="text-base md:text-lg font-semibold text-[#2C3E35]">כמה מפגשים צריך?</span>
+            <span class="plus text-[#8A6F4D] text-2xl font-light flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6 text-gray-600 leading-relaxed text-right text-sm">
+            <div class="pb-4">זה תלוי בצורך. לפעמים כמה מפגשים ממוקדים מספיקים, ולפעמים נכון יותר לעבוד בתהליך עמוק של 10–12 מפגשים. נחליט יחד בשיחת ההיכרות.</div>
+          </div>
+        </div>
+        <div class="fade-in bg-[#F9F7F4] rounded-2xl border border-[#eee7df] overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-[#faf8f5] transition">
+            <span class="text-base md:text-lg font-semibold text-[#2C3E35]">עובדים גם עם אבות?</span>
+            <span class="plus text-[#8A6F4D] text-2xl font-light flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6 text-gray-600 leading-relaxed text-right text-sm">
+            <div class="pb-4">בהחלט — גישתי שיוויונית, אני רואה בהורות שותפות של שניים, ומלווה גם אמהות וגם אבות בצורה שווה ומכבדת.</div>
+          </div>
         </div>
       </div>
-      <div class="border border-gray-200 rounded-2xl overflow-hidden">
-        <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-gray-50 transition">
-          <span class="font-semibold text-[#3A3A3A] text-sm md:text-base">צריך להגיע עם בעיה מוגדרת?</span>
-          <span class="plus text-[#5C6B3A] text-2xl font-light flex-shrink-0">+</span>
-        </button>
-        <div class="faq-answer px-6 text-sm text-gray-500 leading-relaxed">
-          <div class="pb-4">לא. לפעמים מגיעים כי יש קושי מאוד ברור, ולפעמים פשוט כי משהו בבית מרגיש לא נעים. גם זה מספיק כדי להתחיל.</div>
-        </div>
-      </div>
-      <div class="border border-gray-200 rounded-2xl overflow-hidden">
-        <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-gray-50 transition">
-          <span class="font-semibold text-[#3A3A3A] text-sm md:text-base">אפשר גם בזום?</span>
-          <span class="plus text-[#5C6B3A] text-2xl font-light flex-shrink-0">+</span>
-        </button>
-        <div class="faq-answer px-6 text-sm text-gray-500 leading-relaxed">
-          <div class="pb-4">כן. כל המפגשים אפשר לקיים גם בזום — בצורה נוחה, נגישה ואפקטיבית. אני עובדת עם משפחות בכל הארץ ועם ישראלים בחו"ל.</div>
-        </div>
-      </div>
-      <div class="border border-gray-200 rounded-2xl overflow-hidden">
-        <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-gray-50 transition">
-          <span class="font-semibold text-[#3A3A3A] text-sm md:text-base">כמה מפגשים צריך?</span>
-          <span class="plus text-[#5C6B3A] text-2xl font-light flex-shrink-0">+</span>
-        </button>
-        <div class="faq-answer px-6 text-sm text-gray-500 leading-relaxed">
-          <div class="pb-4">זה תלוי בצורך. לפעמים כמה מפגשים ממוקדים מספיקים, ולפעמים נכון יותר לעבוד בתהליך עמוק של 10–12 מפגשים. נחליט יחד בשיחת ההיכרות.</div>
-        </div>
-      </div>
-      <div class="border border-gray-200 rounded-2xl overflow-hidden">
-        <button onclick="toggleFaq(this)" class="w-full text-right px-6 py-4 flex items-center justify-between gap-4 hover:bg-gray-50 transition">
-          <span class="font-semibold text-[#3A3A3A] text-sm md:text-base">עובדים גם עם אבות?</span>
-          <span class="plus text-[#5C6B3A] text-2xl font-light flex-shrink-0">+</span>
-        </button>
-        <div class="faq-answer px-6 text-sm text-gray-500 leading-relaxed">
-          <div class="pb-4">בהחלט — גישתי שיוויונית, אני רואה בהורות שותפות של שניים, ומלווה גם אמהות וגם אבות בצורה שווה ומכבדת.</div>
-        </div>
+      <div class="fade-in rounded-3xl overflow-hidden shadow-lg h-64 md:h-full md:min-h-[400px]">
+        <img src="family-fun.png" alt="משפחה מאושרת" class="w-full h-full object-cover" />
       </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="py-14 px-5 bg-[#F5F1EB]">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-2xl md:text-3xl font-bold text-center text-[#3A3A3A] mb-3 fade-in">בואו נדבר</h2>
-    <p class="text-center text-sm text-gray-500 mb-10 fade-in">שיחת היכרות חינמית של 20 דקות — הצעד הראשון</p>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-      <div class="fade-in space-y-5">
-        <a href="https://wa.me/972546300696" target="_blank" rel="noopener noreferrer"
-           class="flex items-center gap-4 bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition">
-          <div class="w-10 h-10 rounded-full bg-[#F5F1EB] flex items-center justify-center flex-shrink-0">
-            <img src="icon-hands.png" alt="" class="w-5 h-5 object-contain" />
+<section id="contact" class="py-16 md:py-20 px-4 bg-[#F9F7F4]">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 fade-in">
+      <span class="inline-block bg-[#e9ede6] text-[#4a6741] text-xs font-bold px-4 py-1.5 rounded-full mb-4">יצירת קשר</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#2C3E35]">בואו נדבר</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+      <div class="text-right fade-in">
+        <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-7">אם אתם מרגישים שהגיע הזמן לעשות שינוי, להבין יותר טוב מה קורה בבית ולקבל ליווי רגיש ומעשי — אשמח להכיר. השלב הראשון הוא שיחת היכרות חינמית של 20 דקות.</p>
+        <div class="space-y-4 mb-7">
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-full bg-[#e9ede6] flex items-center justify-center flex-shrink-0">
+              <img src="icon-hands.png" alt="" class="w-6 h-6 object-contain" />
+            </div>
+            <div>
+              <div class="text-xs text-gray-500 mb-0.5">וואטסאפ</div>
+              <a href="https://wa.me/972546300696" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2C3E35] hover:text-[#8A6F4D] transition">054-6300696</a>
+            </div>
           </div>
-          <div class="text-right">
-            <div class="text-xs text-gray-400">וואטסאפ</div>
-            <div class="font-semibold text-[#3A3A3A] text-sm">054-6300696</div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-full bg-[#e9ede6] flex items-center justify-center text-lg flex-shrink-0">📧</div>
+            <div>
+              <div class="text-xs text-gray-500 mb-0.5">אימייל</div>
+              <a href="mailto:Sharon.Carfas@gmail.com" class="font-semibold text-[#2C3E35] hover:text-[#8A6F4D] transition">Sharon.Carfas@gmail.com</a>
+            </div>
           </div>
-        </a>
-        <a href="mailto:Sharon.Carfas@gmail.com"
-           class="flex items-center gap-4 bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition">
-          <div class="w-10 h-10 rounded-full bg-[#F5F1EB] flex items-center justify-center flex-shrink-0 text-base">📧</div>
-          <div class="text-right">
-            <div class="text-xs text-gray-400">אימייל</div>
-            <div class="font-semibold text-[#3A3A3A] text-sm">Sharon.Carfas@gmail.com</div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-full bg-[#e9ede6] flex items-center justify-center text-lg flex-shrink-0">📘</div>
+            <div>
+              <div class="text-xs text-gray-500 mb-0.5">פייסבוק</div>
+              <a href="https://www.facebook.com/SharonCarfasFamily" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2C3E35] hover:text-[#8A6F4D] transition">Sharon Carfas Family</a>
+            </div>
           </div>
-        </a>
-        <a href="https://www.facebook.com/SharonCarfasFamily" target="_blank" rel="noopener noreferrer"
-           class="flex items-center gap-4 bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition">
-          <div class="w-10 h-10 rounded-full bg-[#F5F1EB] flex items-center justify-center flex-shrink-0 text-base">📘</div>
-          <div class="text-right">
-            <div class="text-xs text-gray-400">פייסבוק</div>
-            <div class="font-semibold text-[#3A3A3A] text-sm">Sharon Carfas Family</div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 rounded-full bg-[#e9ede6] flex items-center justify-center text-lg flex-shrink-0">📸</div>
+            <div>
+              <div class="text-xs text-gray-500 mb-0.5">אינסטגרם</div>
+              <a href="https://www.instagram.com/sharon.carfas" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2C3E35] hover:text-[#8A6F4D] transition">@sharon.carfas</a>
+            </div>
           </div>
-        </a>
-        <a href="https://www.instagram.com/sharon.carfas" target="_blank" rel="noopener noreferrer"
-           class="flex items-center gap-4 bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition">
-          <div class="w-10 h-10 rounded-full bg-[#F5F1EB] flex items-center justify-center flex-shrink-0 text-base">📸</div>
-          <div class="text-right">
-            <div class="text-xs text-gray-400">אינסטגרם</div>
-            <div class="font-semibold text-[#3A3A3A] text-sm">@sharon.carfas</div>
-          </div>
-        </a>
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-md h-44 md:h-48">
+          <img src="hug-mom.png" alt="חיבוק חם" class="w-full h-full object-cover object-top" />
+        </div>
       </div>
-      <div class="fade-in bg-white rounded-2xl p-6 shadow-sm">
+      <div class="fade-in bg-white rounded-3xl p-7 shadow-sm border border-[#efe4d8]">
         <form id="contact-form" onsubmit="submitForm(event)" class="space-y-4" dir="rtl">
           <div>
-            <label class="block mb-1.5 text-sm font-semibold text-[#3A3A3A]">שם מלא</label>
-            <input type="text" required class="w-full rounded-xl border border-gray-200 px-4 py-3 text-right text-sm focus:outline-none focus:ring-2 focus:ring-[#5C6B3A]" placeholder="איך קוראים לכם?" />
+            <label class="block mb-2 text-sm font-semibold text-[#2C3E35]">שם מלא</label>
+            <input type="text" required class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8A6F4D] text-right text-base" placeholder="איך קוראים לכם?" />
           </div>
           <div>
-            <label class="block mb-1.5 text-sm font-semibold text-[#3A3A3A]">טלפון</label>
-            <input type="tel" required dir="rtl" class="w-full rounded-xl border border-gray-200 px-4 py-3 text-right text-sm focus:outline-none focus:ring-2 focus:ring-[#5C6B3A]" placeholder="050-000-0000" />
+            <label class="block mb-2 text-sm font-semibold text-[#2C3E35]">טלפון</label>
+            <input type="tel" required dir="rtl" class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8A6F4D] text-right text-base" placeholder="050-000-0000" />
           </div>
           <div>
-            <label class="block mb-1.5 text-sm font-semibold text-[#3A3A3A]">הודעה</label>
-            <textarea rows="4" class="w-full rounded-xl border border-gray-200 px-4 py-3 text-right resize-none text-sm focus:outline-none focus:ring-2 focus:ring-[#5C6B3A]" placeholder="ספרו לי קצת עליכם..." ></textarea>
+            <label class="block mb-2 text-sm font-semibold text-[#2C3E35]">הודעה</label>
+            <textarea rows="5" class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8A6F4D] text-right resize-none text-base" placeholder="ספרו לי קצת עליכם (כמה ילדים, גיל, מה הקושי וכו')"></textarea>
           </div>
-          <button type="submit" class="w-full bg-[#5C6B3A] text-white py-3 rounded-full font-semibold text-sm hover:bg-[#4a5630] transition">שליחה ✓</button>
+          <button type="submit" class="w-full bg-[#2C3E35] text-white py-3.5 rounded-full hover:bg-[#3d5445] transition font-bold text-base">שליחה ✓</button>
         </form>
-        <div id="form-success" class="hidden text-center py-8">
-          <img src="icon-heart.png" alt="" class="w-12 h-12 object-contain mx-auto mb-3" />
-          <h3 class="font-bold text-[#3A3A3A] mb-1">ההודעה נשלחה!</h3>
-          <p class="text-sm text-gray-500">אחזור אליכם בהקדם.</p>
+        <div id="form-success" class="hidden text-center py-10">
+          <img src="icon-heart.png" alt="" class="w-14 h-14 object-contain mx-auto mb-4" />
+          <h3 class="text-xl font-bold text-[#2C3E35] mb-2">ההודעה נשלחה!</h3>
+          <p class="text-gray-600">אחזור אליכם בהקדם. תודה שפניתם!</p>
         </div>
       </div>
     </div>
@@ -424,34 +457,35 @@
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-[#3A3A3A] text-white px-5 py-10">
-  <div class="max-w-5xl mx-auto">
+<footer class="bg-[#2C3E35] text-white px-4 md:px-6 py-10">
+  <div class="max-w-6xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-right">
       <div>
-        <img src="logo.png" alt="שרון קרפס" class="h-14 w-auto mb-3 brightness-0 invert" />
-        <p class="text-xs text-white/50 leading-relaxed">מומחית משפחה והורות לגיל הרך<br/>מוסמכת מכון אדלר</p>
+        <img src="logo.png" alt="שרון קרפס" class="logo-blend h-16 w-auto mb-3 brightness-0 invert" />
+        <p class="text-sm text-white/60 leading-relaxed">מומחית משפחה והורות לגיל הרך<br/>מוסמכת מכון אדלר</p>
       </div>
       <div>
-        <h4 class="text-xs font-bold text-white/60 mb-3 uppercase tracking-wider">ניווט</h4>
-        <div class="flex flex-col gap-2 text-sm text-white/50">
-          <a href="#hero" class="hover:text-white transition">דף הבית</a>
-          <a href="#about" class="hover:text-white transition">מי אני</a>
-          <a href="#services" class="hover:text-white transition">שירותים</a>
-          <a href="#testimonials" class="hover:text-white transition">המלצות</a>
-          <a href="#contact" class="hover:text-white transition">יצירת קשר</a>
+        <h4 class="text-sm font-bold text-white/80 mb-3">ניווט מהיר</h4>
+        <div class="flex flex-col gap-2">
+          <a href="#hero"         class="text-sm text-white/60 hover:text-white transition">דף הבית</a>
+          <a href="#about"        class="text-sm text-white/60 hover:text-white transition">מי אני</a>
+          <a href="#services"     class="text-sm text-white/60 hover:text-white transition">שירותים</a>
+          <a href="#testimonials" class="text-sm text-white/60 hover:text-white transition">המלצות</a>
+          <a href="#faq"          class="text-sm text-white/60 hover:text-white transition">שאלות נפוצות</a>
+          <a href="#contact"      class="text-sm text-white/60 hover:text-white transition">יצירת קשר</a>
         </div>
       </div>
       <div>
-        <h4 class="text-xs font-bold text-white/60 mb-3 uppercase tracking-wider">צרו קשר</h4>
-        <div class="flex flex-col gap-2 text-sm text-white/50">
+        <h4 class="text-sm font-bold text-white/80 mb-3">צרו קשר</h4>
+        <div class="flex flex-col gap-2 text-sm text-white/60">
           <a href="https://wa.me/972546300696" class="hover:text-white transition">054-6300696</a>
           <a href="mailto:Sharon.Carfas@gmail.com" class="hover:text-white transition">Sharon.Carfas@gmail.com</a>
-          <a href="https://www.facebook.com/SharonCarfasFamily" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Sharon Carfas Family</a>
-          <a href="https://www.instagram.com/sharon.carfas" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">@sharon.carfas</a>
+          <a href="https://www.facebook.com/SharonCarfasFamily" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">פייסבוק: Sharon Carfas Family</a>
+          <a href="https://www.instagram.com/sharon.carfas" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">אינסטגרם: @sharon.carfas</a>
         </div>
       </div>
     </div>
-    <div class="border-t border-white/10 pt-6 text-center text-xs text-white/30">© 2020 כל הזכויות שמורות לשרון קרפס</div>
+    <div class="border-t border-white/10 pt-6 text-center text-xs text-white/40">© 2020 כל הזכויות שמורות לשרון קרפס</div>
   </div>
 </footer>
 
@@ -459,7 +493,7 @@
 <a href="https://wa.me/972546300696?text=%D7%94%D7%99%D7%99%20%D7%A9%D7%A8%D7%95%D7%9F%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA"
    target="_blank" rel="noopener noreferrer" aria-label="וואטסאפ"
    class="wa-btn fixed bottom-6 left-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition z-50 flex items-center justify-center">
-  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 16 16">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
     <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
   </svg>
 </a>
@@ -470,7 +504,7 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('shadow-md', scrollY > 30);
+    document.getElementById('navbar').classList.toggle('shadow-md', scrollY > 40);
   });
   document.getElementById('burger').addEventListener('click', () => {
     document.getElementById('mob-menu').classList.toggle('translate-x-full');
@@ -486,7 +520,10 @@
     const isOpen = answer.classList.contains('open');
     document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
     document.querySelectorAll('.plus').forEach(p => p.style.transform = 'rotate(0deg)');
-    if (!isOpen) { answer.classList.add('open'); plus.style.transform = 'rotate(45deg)'; }
+    if (!isOpen) {
+      answer.classList.add('open');
+      plus.style.transform = 'rotate(45deg)';
+    }
   }
   function submitForm(e) {
     e.preventDefault();
